@@ -11,7 +11,7 @@ margin = modsize
 
 #ロゴを埋め込むQRコード上の座標
 logoposition_offset_x = 120
-logoposition_offset_y = 120
+logoposition_offset_y = 100
 
 qrimage = cv2.imread("qr.bmp")
 logo_origin = cv2.imread("logo_kobeuniv.png",cv2.IMREAD_UNCHANGED)
