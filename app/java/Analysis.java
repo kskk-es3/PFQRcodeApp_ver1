@@ -45,8 +45,7 @@ public class Analysis {
 	int dimension = modulesize * (17 + 4 * version + 2 * margin);
 
 	//符号語からQRコードを生成、バージョン誤り訂正レベルは適宜変更
-	public void genqr2(byte[][] codewords, String filename) throws IOException, WriterException{
-		String file = filename + ".png";
+	public void genqr2(byte[][] codewords, String pathname) throws IOException, WriterException{
 		Map<EncodeHintType, Object> hints = new EnumMap<>(EncodeHintType.class);
 		//誤り訂正レベル
 		hints.put(EncodeHintType.ERROR_CORRECTION, eLevel);
@@ -57,7 +56,7 @@ public class Analysis {
 		QRCodeWriter writer = new QRCodeWriter();
 		BitMatrix bitMatrix = writer.encodecodeword(codewords, BarcodeFormat.QR_CODE, mask_pattern1, dimension, dimension, hints);
 		BufferedImage image = MatrixToImageWriter.toBufferedImage(bitMatrix);
-		ImageIO.write(image, "png", new File(file));
+		ImageIO.write(image, "png", new File(pathname));
 
 	}
 
