@@ -27,12 +27,11 @@ import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.common.HybridBinarizer;
 
 public class QRgen {
-    public static void main(String[] args) throws Exception {
+    public static void qrgen(String contents) {
 
-		/////QRgen → LogoinQR → Nonsystematiccode → GenlogoQR → Adddot
 
-        //// QRコード生成
-        String contents = "www.kobe-u.ac.jp/";
+        //// URLを受け取ってQRコードを生成する
+        
 		System.out.println(contents);
 
 		int version = 5;
@@ -88,7 +87,7 @@ public class QRgen {
 			System.out.println("largecodenum:" + largecodenum);
 			
 
-			////資料としてシンボルを図示した図を生成
+			//資料としてシンボルを図示した図を生成
 			
 			//１モジュール1bitのbitmatrixを生成
 			Map<EncodeHintType, Object> hints2 = new EnumMap<>(EncodeHintType.class);
@@ -107,66 +106,65 @@ public class QRgen {
 			int[][][] Symbol = parser.ModuleToSymbol();
 
 
-			int[][] blockcolor = {{255,0,0},{0,255,0},{0,0,255},{255,255,0},{255,0,255},{0,255,255},{255,255,255},
-								  {191,0,0},{0,191,0},{0,0,191},{191,191,0},{191,0,191},{0,191,191},{191,191,191},
-								  {127,0,0},{0,127,0},{0,0,127},{127,127,0},{127,0,127},{0,127,127},{127,127,127},
-								  {63,0,0},{0,63,0},{0,0,63},{63,63,0},{63,0,63},{0,63,63},{63,63,63}};
-			//各rsブロックのシンボルごとに塗分け
+			// int[][] blockcolor = {{255,0,0},{0,255,0},{0,0,255},{255,255,0},{255,0,255},{0,255,255},{255,255,255},
+			// 					  {191,0,0},{0,191,0},{0,0,191},{191,191,0},{191,0,191},{0,191,191},{191,191,191},
+			// 					  {127,0,0},{0,127,0},{0,0,127},{127,127,0},{127,0,127},{0,127,127},{127,127,127},
+			// 					  {63,0,0},{0,63,0},{0,0,63},{63,63,0},{63,0,63},{0,63,63},{63,63,63}};
+			// //各rsブロックのシンボルごとに塗分け
 
-			int colornum = 0;
-			for(int i = 0; i < datablocks[0].getNumDataCodewords()*rsblocknum; i++){
-				for(int j = 0; j < Symbol[i].length; j++){
-					setRGB(symbol, Symbol[i][j][0], Symbol[i][j][1], blockcolor[colornum]);
-				}
-				colornum++;
-				if(colornum == rsblocknum){
-				colornum = 0;
-				}
+			// int colornum = 0;
+			// for(int i = 0; i < datablocks[0].getNumDataCodewords()*rsblocknum; i++){
+			// 	for(int j = 0; j < Symbol[i].length; j++){
+			// 		setRGB(symbol, Symbol[i][j][0], Symbol[i][j][1], blockcolor[colornum]);
+			// 	}
+			// 	colornum++;
+			// 	if(colornum == rsblocknum){
+			// 	colornum = 0;
+			// 	}
 
-			}
+			// }
 
-			colornum = smallcodenum;
-			for (int i = datablocks[0].getNumDataCodewords()*rsblocknum; i < datablocks[0].getNumDataCodewords()*rsblocknum + largecodenum; i++){
-				for(int j = 0; j < Symbol[i].length; j++){
-					setRGB(symbol, Symbol[i][j][0], Symbol[i][j][1], blockcolor[colornum]);
-				}
-				colornum++;
-				if(colornum == rsblocknum){
-				colornum = datablocks.length - largecodenum;
-				}
-			}
+			// colornum = smallcodenum;
+			// for (int i = datablocks[0].getNumDataCodewords()*rsblocknum; i < datablocks[0].getNumDataCodewords()*rsblocknum + largecodenum; i++){
+			// 	for(int j = 0; j < Symbol[i].length; j++){
+			// 		setRGB(symbol, Symbol[i][j][0], Symbol[i][j][1], blockcolor[colornum]);
+			// 	}
+			// 	colornum++;
+			// 	if(colornum == rsblocknum){
+			// 	colornum = datablocks.length - largecodenum;
+			// 	}
+			// }
 
-			colornum = 0;
-			for (int i = datablocks[0].getNumDataCodewords()*rsblocknum + largecodenum; i < Symbol.length; i++){
-				for(int j = 0; j < Symbol[i].length; j++){
-					setRGB(symbol, Symbol[i][j][0], Symbol[i][j][1], blockcolor[colornum]);
-				}
-				colornum++;
-				if(colornum >= rsblocknum){
-				colornum = 0;
-				}
-			}
+			// colornum = 0;
+			// for (int i = datablocks[0].getNumDataCodewords()*rsblocknum + largecodenum; i < Symbol.length; i++){
+			// 	for(int j = 0; j < Symbol[i].length; j++){
+			// 		setRGB(symbol, Symbol[i][j][0], Symbol[i][j][1], blockcolor[colornum]);
+			// 	}
+			// 	colornum++;
+			// 	if(colornum >= rsblocknum){
+			// 	colornum = 0;
+			// 	}
+			// }
 
-			BufferedImage symbol_resize = new BufferedImage(symbol.getWidth()*modulesize, symbol.getHeight()*modulesize,1);
+			// BufferedImage symbol_resize = new BufferedImage(symbol.getWidth()*modulesize, symbol.getHeight()*modulesize,1);
 
-			//拡大して保存
-			for(int i = 0; i < symbol.getWidth(); i++){
-				for(int j = 0; j < symbol.getHeight(); j++){
-					int[] modcolor = getRGB(symbol, i, j);
-					for(int s = i*modulesize; s < (i+1)*modulesize; s++){
-						for(int t = j*modulesize; t < (j+1)*modulesize; t++){
-							setRGB(symbol_resize, s, t, modcolor);
-						}
-					}				
-				}
-			}
+			// //拡大して保存
+			// for(int i = 0; i < symbol.getWidth(); i++){
+			// 	for(int j = 0; j < symbol.getHeight(); j++){
+			// 		int[] modcolor = getRGB(symbol, i, j);
+			// 		for(int s = i*modulesize; s < (i+1)*modulesize; s++){
+			// 			for(int t = j*modulesize; t < (j+1)*modulesize; t++){
+			// 				setRGB(symbol_resize, s, t, modcolor);
+			// 			}
+			// 		}				
+			// 	}
+			// }
 			
-			ImageIO.write(symbol_resize, "BMP", new File("symbol.bmp"));
+			// ImageIO.write(symbol_resize, "BMP", new File("symbol.bmp"));
 
 
 			////URL部分と各種機能パターン，形式情報をマスク
 			////Nonsystematiccode.javaに読み込むロゴ入りQRはURLと機能パターン，形式情報だけそのままの必要がある
-			////マスク部分にロゴが重ならないようにLogoinQRで利用
 			BitMatrix mask_bit = new BitMatrix(bitmatrix_mod.getHeight());
 
 			//機能パターンと形式情報をマスク
@@ -219,37 +217,37 @@ public class QRgen {
 			BufferedImage mask = MatrixToImageWriter.toBufferedImage(mask_bit_resize);
 			ImageIO.write(mask, "BMP", new File("mask.bmp"));
 
-			////Adddotで使うかも②。機能パターンを黒くマスク
-			BitMatrix fun_mask_bit = new BitMatrix(bitmatrix_mod.getHeight());
+			// ////機能パターンを黒くマスク
+			// BitMatrix fun_mask_bit = new BitMatrix(bitmatrix_mod.getHeight());
 
-			for(int i = 0; i < fun_mask_bit.getHeight(); i++){
-				for(int j = 0; j < fun_mask_bit.getWidth(); j++){
-					fun_mask_bit.set(i, j);
-				}
-			}
-			for(int i = 0; i < Symbol.length; i++){
-				for(int j = 0; j < Symbol[i].length; j++){
-					fun_mask_bit.unset(Symbol[i][j][0], Symbol[i][j][1]);
-				}
-			}
+			// for(int i = 0; i < fun_mask_bit.getHeight(); i++){
+			// 	for(int j = 0; j < fun_mask_bit.getWidth(); j++){
+			// 		fun_mask_bit.set(i, j);
+			// 	}
+			// }
+			// for(int i = 0; i < Symbol.length; i++){
+			// 	for(int j = 0; j < Symbol[i].length; j++){
+			// 		fun_mask_bit.unset(Symbol[i][j][0], Symbol[i][j][1]);
+			// 	}
+			// }
 
-			//拡大して保存
-			BitMatrix fun_mask_bit_resize = new BitMatrix((fun_mask_bit.getHeight() + 2*margin) * modulesize);
+			// //拡大して保存
+			// BitMatrix fun_mask_bit_resize = new BitMatrix((fun_mask_bit.getHeight() + 2*margin) * modulesize);
 			
-			for(int i = 0; i < fun_mask_bit.getHeight(); i++){
-				for(int j = 0; j < fun_mask_bit.getWidth(); j++){
-					if(fun_mask_bit.get(i, j)){
-						for(int s = (i+margin)*modulesize; s < (i+1+margin)*modulesize; s++){
-							for(int t = (j+margin)*modulesize; t < (j+1+margin)*modulesize; t++){
-								fun_mask_bit_resize.set(s, t);
-							}
-						}
-					}
-				}
-			}
+			// for(int i = 0; i < fun_mask_bit.getHeight(); i++){
+			// 	for(int j = 0; j < fun_mask_bit.getWidth(); j++){
+			// 		if(fun_mask_bit.get(i, j)){
+			// 			for(int s = (i+margin)*modulesize; s < (i+1+margin)*modulesize; s++){
+			// 				for(int t = (j+margin)*modulesize; t < (j+1+margin)*modulesize; t++){
+			// 					fun_mask_bit_resize.set(s, t);
+			// 				}
+			// 			}
+			// 		}
+			// 	}
+			// }
 
-			BufferedImage funmask = MatrixToImageWriter.toBufferedImage(fun_mask_bit_resize);
-			ImageIO.write(funmask, "BMP", new File("funmask.bmp"));
+			// BufferedImage funmask = MatrixToImageWriter.toBufferedImage(fun_mask_bit_resize);
+			// ImageIO.write(funmask, "BMP", new File("funmask.bmp"));
 
 		} catch (Exception e) {
 			e.printStackTrace();

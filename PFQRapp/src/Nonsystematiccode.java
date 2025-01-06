@@ -26,9 +26,8 @@ import com.google.zxing.common.reedsolomon.GenericGF;
 import com.google.zxing.common.reedsolomon.ReedSolomonDecoder;
 
 public class Nonsystematiccode {
-    public static void main(String[] args) throws Exception {
+    public static void nonsystematiccode(String pathname) throws Exception {
 
-		/////QRgen → LogoinQR → Nonsystematiccode → GenlogoQR → Adddot
 
 		////ロゴを重ねたQRコードを読み込んで非組織符号化を行い、ロゴを重ねた時に読み取り可能なQRコードを生成する 
 
@@ -36,8 +35,7 @@ public class Nonsystematiccode {
 		Analysis analysis = new Analysis();
 
 		//ロゴをのせたQRコード画像を読み込んで格納されている符号語を抽出
-		File file = new File("logoinQR_mod.bmp");
-		// File file = new File("nonsystematicQR.png");
+		File file = new File(pathname);
 		BufferedImage image = ImageIO.read(file);
 		DataBlock[] datablocks = analysis.symbolgen(image);
 
