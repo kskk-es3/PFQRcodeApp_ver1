@@ -81,7 +81,7 @@ if __name__ == "__main__":
     # javaファイルを実行するためにJpypeを起動
     jpype.startJVM()
     # app中のjavaディレクトリをクラスパスに追加
-    jpype.addClassPath("java")
+    # jpype.addClassPath("java")
     app.run(host = "0.0.0.0", port = 5000, debug = True)
     # Jpypeを終了
-    jpype.shutdownJVM()
+    # jpype.shutdownJVM()
