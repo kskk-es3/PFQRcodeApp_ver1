@@ -18,6 +18,34 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
+import os
+from flask import send_file
+from io import BytesIO
+import zipfile
+import time
+
+def create_zip_from_directory(directory_path):
+    memory_file = BytesIO()
+
+    # ZIPファイルを作成
+    with zipfile.ZipFile(memory_file, 'w') as zf:
+        # ディレクトリ内のすべてのファイルを取得
+        for root, _, files in os.walk(directory_path):
+            for file_name in files:
+                file_path = os.path.join(root, file_name)  # フルパスを生成
+                relative_path = os.path.relpath(file_path, directory_path)  # ZIP内の相対パス
+                zip_info = zipfile.ZipInfo(relative_path)
+                zip_info.date_time = time.localtime(time.time())[:6]
+                zip_info.compress_type = zipfile.ZIP_DEFLATED
+                # ファイルをZIPに書き込む
+                with open(file_path, 'rb') as f:
+                    zf.writestr(zip_info, f.read())
+    
+    # ファイルポインタを先頭に戻す
+    memory_file.seek(0)
+    return send_file(memory_file, download_name='output.zip', as_attachment=True)
+
+
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
@@ -40,6 +68,12 @@ def upload_file():
             PFQRmain.PFQRmain(input_text)
     
     return render_template('index.html')
+
+
+@app.route('/download_zip')
+def download_zip():
+    directory_path = './imagedata_output'
+    return create_zip_from_directory(directory_path)
 
 
 

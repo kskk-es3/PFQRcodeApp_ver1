@@ -8,14 +8,26 @@
 <body>
     <h1>PFQRコード生成システム</h1>
     <form method="post" enctype="multipart/form-data">
-        <p>QRコードに格納したいURLを入力
-        <br><input type="text" id="text_input" name="text_input" placeholder="Enter the URL"></p>
+        <p>
+            QRコードに格納したいURLを入力
+            <br><input type="text" id="text_input" name="text_input" placeholder="Enter the URL">
+        </p>
 
-        <p>QRコード上に配置する画像を選択
-        <br><input type="file" name="file"></p>
+        <p>
+            QRコード上に配置する画像を選択
+            <br><input type="file" name="file">
+        </p>
 
-        <p><input type="submit" value="PFQRコードを生成"></p>
+        <p>
+            <input type="submit" value="PFQRコードを生成">
+        </p>
+
     </form>
+
+
+    <p>
+        <a href="/download_zip" class="button">ダウンロード</a>
+    </p>
 
 </body>
 </html>
