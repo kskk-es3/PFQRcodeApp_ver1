@@ -78,6 +78,9 @@ def download_zip():
 
 
 if __name__ == "__main__":
+
+    os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+
     # javaファイルを実行するためにJpypeを起動
     jpype.startJVM()
     # app中のjavaディレクトリをクラスパスに追加
