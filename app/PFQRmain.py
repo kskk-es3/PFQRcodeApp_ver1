@@ -12,7 +12,7 @@ import HiddenqrPattern1
 def PFQRmain(contents):
 
     #入力2 QRコード上に配置する画像のパス
-    picturepath = "//myproject//PFQRcodeApp//uploads//picture.png"
+    picturepath = '/home/mitsui/myproject/PFQRcodeApp/uploads/picture.png'
 
     ##QRコードを生成　QRgen.javaで処理
     #QRgenを呼び出し
