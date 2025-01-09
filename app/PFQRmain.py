@@ -1,8 +1,6 @@
 import cv2
 import jpype
 import numpy as np
-
-import QRarrange
 import HiddenqrPattern1
 
 
@@ -99,9 +97,8 @@ def PFQRmain(contents):
 
 
     #HiddenQRコードを生成して保存
-    qrarange = QRarrange.qrarrange(nonsytematicQR)
     backimage = cv2.imread("backimage//pattern1_backimage.bmp")
-    Hiddenqr = HiddenqrPattern1.HiddenQRgen(backimage, qrarange)
+    Hiddenqr = HiddenqrPattern1.HiddenQRgen(backimage, nonsytematicQR)
     Hiddenqr_nomalFP = np.copy(Hiddenqr)
 
     #HiddenQRコードのファインダパターン部分だけ通常の形状に戻す

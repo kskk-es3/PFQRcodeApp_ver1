@@ -43,7 +43,8 @@ def create_zip_from_directory(directory_path):
     
     # ファイルポインタを先頭に戻す
     memory_file.seek(0)
-    return send_file(memory_file, download_name='output.zip', as_attachment=True)
+    print("保存完了")
+    return memory_file
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -65,7 +66,14 @@ def upload_file():
             new_filename = f"picture.png"
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], new_filename))
             input_text = request.form.get('text_input')
+
+            #PFQRを生成
             PFQRmain.PFQRmain(input_text)
+
+            # PFQRmainの処理後、ZIPファイルを作成して送信
+            directory_path = './imagedata_output'
+            zip_file = create_zip_from_directory(directory_path)
+            return send_file(zip_file, download_name='output.zip', as_attachment=True)
     
     return render_template('index.html')
 
