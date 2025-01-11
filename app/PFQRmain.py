@@ -6,8 +6,8 @@ import HiddenqrPattern1
 
 ####PFQRコード生成システム，コアプログラム
 
-#入力1 格納するURL
-def PFQRmain(contents):
+#入力1 格納するURL，入力オプション1画像のサイズ(ラジオボタンのラベルをそのまま入力)
+def PFQRmain(contents,picturesize):
 
     #入力2 QRコード上に配置する画像のパス
     picturepath = "uploads//picture.png"
@@ -23,21 +23,54 @@ def PFQRmain(contents):
     modsize = 20
     margin = modsize
 
-    #ロゴを埋め込むQRコード上の座標
-    pictureposition_offset_x = 120
-    pictureposition_offset_y = 100
+    #画像の座標と大きさを入力オプション1のパーセンテージ毎に設定
+    if picturesize == "25%":
+
+        #画像を埋め込むQRコード上の座標
+        pictureposition_offset_x = 180
+        pictureposition_offset_y = 180
+
+        #画像をリサイズする大きさ
+        resize_width = 400
+        resize_height = 400
+    
+    elif picturesize == "30%":
+
+        #画像を埋め込むQRコード上の座標
+        pictureposition_offset_x = 160
+        pictureposition_offset_y = 160
+
+        #画像をリサイズする大きさ
+        resize_width = 420
+        resize_height = 420
+    
+    elif picturesize == "35%":
+
+        #画像を埋め込むQRコード上の座標
+        pictureposition_offset_x = 140
+        pictureposition_offset_y = 140
+
+        #画像をリサイズする大きさ
+        resize_width = 460
+        resize_height = 460
+
+    elif picturesize == "40%":
+
+        #画像を埋め込むQRコード上の座標
+        pictureposition_offset_x = 120
+        pictureposition_offset_y = 100
+
+        #画像をリサイズする大きさ
+        resize_width = 500
+        resize_height = 500
 
     qrimage = cv2.imread("qr.bmp")
     picture_origin = cv2.imread(picturepath)
     mask = cv2.imread("mask.bmp",cv2.IMREAD_GRAYSCALE)
 
     qr_height, qr_width = qrimage.shape[:2]
-    picture_height, picture_width = picture_origin.shape[:2]
 
-    #ロゴをリサイズ
-    resize_width = 460
-    resize_height = round(picture_height * (resize_width / picture_width))
-    resize_height = 460
+    
     picture = cv2.resize(picture_origin,dsize=(resize_width, resize_height))
 
     picture_height, picture_width = picture.shape[:2]
@@ -50,8 +83,6 @@ def PFQRmain(contents):
         for j in range (0, picture_width):
             if mask[i + pictureposition_offset_x][j + pictureposition_offset_y] == 255:
                 qrimage[i + pictureposition_offset_x][j + pictureposition_offset_y] = [picture[i][j][0], picture[i][j][1], picture[i][j][2]]  
-    
-
 
     #ロゴ入りQRコードを二値化する
     #グレースケールに変換　0.299⋅R+0.587⋅G+0.114⋅B

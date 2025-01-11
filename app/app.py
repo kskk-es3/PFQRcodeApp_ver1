@@ -17,7 +17,6 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-
 import os
 from flask import send_file
 from io import BytesIO
@@ -43,7 +42,6 @@ def create_zip_from_directory(directory_path):
     
     # ファイルポインタを先頭に戻す
     memory_file.seek(0)
-    print("保存完了")
     return memory_file
 
 
@@ -66,9 +64,10 @@ def upload_file():
             new_filename = f"picture.png"
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], new_filename))
             input_text = request.form.get('text_input')
+            input_picturesize = request.form.get('number')
 
             #PFQRを生成
-            PFQRmain.PFQRmain(input_text)
+            PFQRmain.PFQRmain(input_text,input_picturesize)
 
             # PFQRmainの処理後、ZIPファイルを作成して送信
             directory_path = './imagedata_output'
