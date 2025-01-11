@@ -24,7 +24,7 @@ def PFQRmain(contents,picturesize):
     margin = modsize
 
     #画像の座標と大きさを入力オプション1のパーセンテージ毎に設定
-    if picturesize == "25%":
+    if picturesize == "26%":
 
         #画像を埋め込むQRコード上の座標
         pictureposition_offset_x = 180
@@ -34,7 +34,7 @@ def PFQRmain(contents,picturesize):
         resize_width = 400
         resize_height = 400
     
-    elif picturesize == "30%":
+    elif picturesize == "29%":
 
         #画像を埋め込むQRコード上の座標
         pictureposition_offset_x = 160
@@ -43,6 +43,16 @@ def PFQRmain(contents,picturesize):
         #画像をリサイズする大きさ
         resize_width = 420
         resize_height = 420
+
+    elif picturesize == "32%":
+
+        #画像を埋め込むQRコード上の座標
+        pictureposition_offset_x = 160
+        pictureposition_offset_y = 160
+
+        #画像をリサイズする大きさ
+        resize_width = 440
+        resize_height = 440
     
     elif picturesize == "35%":
 
@@ -54,7 +64,17 @@ def PFQRmain(contents,picturesize):
         resize_width = 460
         resize_height = 460
 
-    elif picturesize == "40%":
+    elif picturesize == "38%":
+
+        #画像を埋め込むQRコード上の座標
+        pictureposition_offset_x = 120
+        pictureposition_offset_y = 120
+
+        #画像をリサイズする大きさ
+        resize_width = 480
+        resize_height = 480
+
+    elif picturesize == "41%":
 
         #画像を埋め込むQRコード上の座標
         pictureposition_offset_x = 120
