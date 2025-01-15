@@ -24,16 +24,46 @@ def PFQRmain(contents,picturesize):
     margin = modsize
 
     #画像の座標と大きさを入力オプション1のパーセンテージ毎に設定
-    if picturesize == "26%":
+    if picturesize == "25%":
 
         #画像を埋め込むQRコード上の座標
         pictureposition_offset_x = 180
         pictureposition_offset_y = 180
 
         #画像をリサイズする大きさ
-        resize_width = 400
-        resize_height = 400
-    
+        resize_width = 390
+        resize_height = 390
+
+    elif picturesize == "26%":
+
+        #画像を埋め込むQRコード上の座標
+        pictureposition_offset_x = 180
+        pictureposition_offset_y = 180
+
+        #画像をリサイズする大きさ
+        resize_width = 398
+        resize_height = 398
+
+    elif picturesize == "27%":
+
+        #画像を埋め込むQRコード上の座標
+        pictureposition_offset_x = 160
+        pictureposition_offset_y = 160
+
+        #画像をリサイズする大きさ
+        resize_width = 405
+        resize_height = 405
+
+    elif picturesize == "28%":
+
+        #画像を埋め込むQRコード上の座標
+        pictureposition_offset_x = 160
+        pictureposition_offset_y = 160
+
+        #画像をリサイズする大きさ
+        resize_width = 413
+        resize_height = 413
+
     elif picturesize == "29%":
 
         #画像を埋め込むQRコード上の座標
@@ -44,6 +74,26 @@ def PFQRmain(contents,picturesize):
         resize_width = 420
         resize_height = 420
 
+    elif picturesize == "30%":
+
+        #画像を埋め込むQRコード上の座標
+        pictureposition_offset_x = 160
+        pictureposition_offset_y = 160
+
+        #画像をリサイズする大きさ
+        resize_width = 427
+        resize_height = 427
+
+    elif picturesize == "31%":
+
+        #画像を埋め込むQRコード上の座標
+        pictureposition_offset_x = 160
+        pictureposition_offset_y = 160
+
+        #画像をリサイズする大きさ
+        resize_width = 434
+        resize_height = 434
+
     elif picturesize == "32%":
 
         #画像を埋め込むQRコード上の座標
@@ -51,9 +101,30 @@ def PFQRmain(contents,picturesize):
         pictureposition_offset_y = 160
 
         #画像をリサイズする大きさ
-        resize_width = 440
-        resize_height = 440
+        resize_width = 441
+        resize_height = 441
+
     
+    elif picturesize == "33%":
+
+        #画像を埋め込むQRコード上の座標
+        pictureposition_offset_x = 160
+        pictureposition_offset_y = 160
+
+        #画像をリサイズする大きさ
+        resize_width = 448
+        resize_height = 448
+    
+    elif picturesize == "34%":
+
+        #画像を埋め込むQRコード上の座標
+        pictureposition_offset_x = 140
+        pictureposition_offset_y = 140
+
+        #画像をリサイズする大きさ
+        resize_width = 455
+        resize_height = 455
+
     elif picturesize == "35%":
 
         #画像を埋め込むQRコード上の座標
@@ -61,8 +132,28 @@ def PFQRmain(contents,picturesize):
         pictureposition_offset_y = 140
 
         #画像をリサイズする大きさ
-        resize_width = 460
-        resize_height = 460
+        resize_width = 461
+        resize_height = 461
+
+    elif picturesize == "36%":
+
+        #画像を埋め込むQRコード上の座標
+        pictureposition_offset_x = 120
+        pictureposition_offset_y = 120
+
+        #画像をリサイズする大きさ
+        resize_width = 468
+        resize_height = 468
+
+    elif picturesize == "37%":
+
+        #画像を埋め込むQRコード上の座標
+        pictureposition_offset_x = 120
+        pictureposition_offset_y = 120
+
+        #画像をリサイズする大きさ
+        resize_width = 474
+        resize_height = 474
 
     elif picturesize == "38%":
 
@@ -71,18 +162,28 @@ def PFQRmain(contents,picturesize):
         pictureposition_offset_y = 120
 
         #画像をリサイズする大きさ
-        resize_width = 480
-        resize_height = 480
+        resize_width = 481
+        resize_height = 481
 
-    elif picturesize == "41%":
+    elif picturesize == "39%":
 
         #画像を埋め込むQRコード上の座標
         pictureposition_offset_x = 120
         pictureposition_offset_y = 100
 
         #画像をリサイズする大きさ
-        resize_width = 500
-        resize_height = 500
+        resize_width = 487
+        resize_height = 487
+
+    elif picturesize == "40%":
+
+        #画像を埋め込むQRコード上の座標
+        pictureposition_offset_x = 120
+        pictureposition_offset_y = 100
+
+        #画像をリサイズする大きさ
+        resize_width = 493
+        resize_height = 493
 
     qrimage = cv2.imread("qr.bmp")
     picture_origin = cv2.imread(picturepath)
@@ -187,6 +288,6 @@ def PFQRmain(contents,picturesize):
 
     print("picture area ratio:",ratio)
 
-    cv2.imwrite("imagedata_output//PFQRcode.bmp", Hiddenqr) #出力1
-    cv2.imwrite("imagedata_output//PFQRcode_nomalFP.bmp", Hiddenqr_nomalFP) #出力2
-    cv2.imwrite("imagedata_output//pictureQRcode.bmp", nonsytematicQR) #出力3
+    cv2.imwrite("imagedata_output//PFQRcode.jpg", Hiddenqr) #出力1
+    cv2.imwrite("imagedata_output//PFQRcode_nomalFP.jpg", Hiddenqr_nomalFP) #出力2
+    cv2.imwrite("imagedata_output//pictureQRcode.jpg", nonsytematicQR) #出力3

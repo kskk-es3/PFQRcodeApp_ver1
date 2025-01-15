@@ -1,10 +1,10 @@
-from flask import Flask, request, redirect, url_for, render_template
+from flask import Flask, request, redirect, url_for, render_template, send_from_directory
 import os
 import PFQRmain
 import jpype
 from werkzeug.utils import secure_filename
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='imagedata_output')
 
 # アップロードされたファイルを保存するディレクトリ
 UPLOAD_FOLDER = 'uploads'
@@ -16,34 +16,6 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'bmp'}
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
-import os
-from flask import send_file
-from io import BytesIO
-import zipfile
-import time
-
-def create_zip_from_directory(directory_path):
-    memory_file = BytesIO()
-
-    # ZIPファイルを作成
-    with zipfile.ZipFile(memory_file, 'w') as zf:
-        # ディレクトリ内のすべてのファイルを取得
-        for root, _, files in os.walk(directory_path):
-            for file_name in files:
-                file_path = os.path.join(root, file_name)  # フルパスを生成
-                relative_path = os.path.relpath(file_path, directory_path)  # ZIP内の相対パス
-                zip_info = zipfile.ZipInfo(relative_path)
-                zip_info.date_time = time.localtime(time.time())[:6]
-                zip_info.compress_type = zipfile.ZIP_DEFLATED
-                # ファイルをZIPに書き込む
-                with open(file_path, 'rb') as f:
-                    zf.writestr(zip_info, f.read())
-    
-    # ファイルポインタを先頭に戻す
-    memory_file.seek(0)
-    return memory_file
-
 
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
@@ -69,19 +41,31 @@ def upload_file():
             #PFQRを生成
             PFQRmain.PFQRmain(input_text,input_picturesize)
 
-            # PFQRmainの処理後、ZIPファイルを作成して送信
-            directory_path = './imagedata_output'
-            zip_file = create_zip_from_directory(directory_path)
-            return send_file(zip_file, download_name='output.zip', as_attachment=True)
-    
+             # 処理完了後、結果ページへリダイレクト
+            return redirect(url_for('result'))
+
     return render_template('index.html')
 
 
-@app.route('/download_zip')
-def download_zip():
-    directory_path = './imagedata_output'
-    return create_zip_from_directory(directory_path)
+@app.route('/result')
+def result():
+    #結果画面に遷移
+    return render_template('result.html')
 
+@app.route('/download/PFQRcode')
+def download_PFQRcode():
+    # PFQRcodeをダウンロード
+    return send_from_directory('./imagedata_output', 'PFQRcode.jpg', as_attachment=True)
+
+@app.route('/download/PFQRcode_nomalFP')
+def download_PFQRcode_nomalFP():
+    # PFQRcode_nomalFPをダウンロード
+    return send_from_directory('./imagedata_output', 'PFQRcode_nomalFP.jpg', as_attachment=True)
+
+@app.route('/download/pictureQRcode')
+def download_pictureQRcode():
+    # pictureQRcodeをダウンロード
+    return send_from_directory('./imagedata_output', 'pictureQRcode.jpg', as_attachment=True)
 
 
 if __name__ == "__main__":

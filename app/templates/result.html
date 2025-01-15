@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生成結果</title>
+    <style>
+        .container {
+            display: flex;
+            align-items: center;
+            gap: 50px; /* 各画像とボタンの間のスペース */
+        }
+    </style>
+
+</head>
+<body>
+    <h1>PFQRコードの生成が完了しました！</h1>
+    <p>以下の画像を確認し、それぞれダウンロードしてください。</p>
+
+    <div class="container">
+        <div>
+            <p>PFQRコード</p>
+            <img src="./imagedata_output/PFQRcode.jpg" alt="PFQRcode" style="max-width: 200px;">
+            <form action="{{ url_for('download_PFQRcode') }}" method="get">
+                <button type="submit">この画像をダウンロード</button>
+            </form>
+        </div>
+    
+        <div>
+            <p>PFQRコード(通常のファインダーパターン)</p>
+            <img src="./imagedata_output/PFQRcode_nomalFP.jpg" alt="PFQRcode_nomalFP" style="max-width: 200px;">
+            <form action="{{ url_for('download_PFQRcode_nomalFP') }}" method="get">
+                <button type="submit">この画像をダウンロード</button>
+            </form>
+        </div>
+        
+        <div>
+            <p>画像入りQRコード</p>
+            <img src="./imagedata_output/pictureQRcode.jpg" alt="pictureQRcode" style="max-width: 200px;">
+            <form action="{{ url_for('download_pictureQRcode') }}" method="get">
+                <button type="submit">この画像をダウンロード</button>
+            </form>
+        </div>
+    </div>
+    
+    <div>
+        <p>
+            <form action="{{ url_for('upload_file') }}" method="get">
+                <button type="submit">データ入力画面に戻る</button>
+            </form>
+        </p>
+    </div>
+
+</body>
+</html>

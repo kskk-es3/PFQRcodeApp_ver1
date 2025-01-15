@@ -4,10 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PFQRcode生成システム</title>
+    <style>
+        #loading {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.8);
+            z-index: 1000;
+            text-align: center;
+            padding-top: 20%;
+            font-size: 1.5em;
+            color: #555;
+        }
+    </style>
+
 </head>
 <body>
     <h1>PFQRコード生成システム</h1>
-    <form method="post" enctype="multipart/form-data">
+
+    <div id="loading">処理中です...お待ちください。</div>
+
+    <form method="post" enctype="multipart/form-data" onsubmit="showLoading()">
         <p>
             QRコードに格納したいURLを入力
             <br><input type="text" id="text_input" name="text_input" placeholder="Enter the URL">
@@ -20,12 +40,24 @@
 
         <p>
             QRコード上の画像の大きさを選択<br>
-            <label><input type="radio" name="number" value="26%"> 26%</label><br>
-            <label><input type="radio" name="number" value="29%"> 29%</label><br>
-            <label><input type="radio" name="number" value="32%"> 32%</label><br>
-            <label><input type="radio" name="number" value="35%" checked> 35%</label><br>
-            <label><input type="radio" name="number" value="38%"> 38%</label><br>
-            <label><input type="radio" name="number" value="41%"> 41%</label>
+            <select name="number">
+                <option value="25%">25%</option>
+                <option value="26%">26%</option>
+                <option value="27%">27%</option>
+                <option value="28%">28%</option>
+                <option value="29%">29%</option>
+                <option value="30%">30%</option>
+                <option value="31%">31%</option>
+                <option value="32%">32%</option>
+                <option value="33%">33%</option>
+                <option value="34%">34%</option>
+                <option value="35%" selected>35%</option>
+                <option value="36%">36%</option>
+                <option value="37%">37%</option>
+                <option value="38%">38%</option>
+                <option value="39%">39%</option>
+                <option value="40%">40%</option>
+            </select>
         </p>
 
 
@@ -35,6 +67,11 @@
 
     </form>
 
+    <script>
+        function showLoading() {
+            document.getElementById("loading").style.display = "block";
+        }
+    </script>
 
 </body>
 </html>
