@@ -44,7 +44,25 @@ public class Analysis {
 	int modulesize = 20; //適宜変更
 	int dimension = modulesize * (17 + 4 * version + 2 * margin);
 
-	//符号語からQRコードを生成、バージョン誤り訂正レベルは適宜変更
+	//符号語からQRコードを生成
+	public void genqr1(byte[][] codewords, String pathname) throws IOException, WriterException{
+		Map<EncodeHintType, Object> hints = new EnumMap<>(EncodeHintType.class);
+		//誤り訂正レベル
+		hints.put(EncodeHintType.ERROR_CORRECTION, eLevel);
+		//バージョン
+		hints.put(EncodeHintType.QR_VERSION, version);
+		hints.put(EncodeHintType.MARGIN, margin);
+
+		QRCodeWriter writer = new QRCodeWriter();
+		//apform = 0なら通常の形状それ以外の数値なら変更した形状(MatrixUtil.java)
+		int apform = 0;
+		BitMatrix bitMatrix = writer.encodecodeword(codewords, BarcodeFormat.QR_CODE, mask_pattern1, dimension, dimension, apform, hints);
+		BufferedImage image = MatrixToImageWriter.toBufferedImage(bitMatrix);
+		ImageIO.write(image, "png", new File(pathname));
+
+	}
+
+	//符号語からQRコードを生成,アライメントパターンを少し変更変更した形状はMatrixUtil.javaで定義
 	public void genqr2(byte[][] codewords, String pathname) throws IOException, WriterException{
 		Map<EncodeHintType, Object> hints = new EnumMap<>(EncodeHintType.class);
 		//誤り訂正レベル
@@ -54,7 +72,10 @@ public class Analysis {
 		hints.put(EncodeHintType.MARGIN, margin);
 
 		QRCodeWriter writer = new QRCodeWriter();
-		BitMatrix bitMatrix = writer.encodecodeword(codewords, BarcodeFormat.QR_CODE, mask_pattern1, dimension, dimension, hints);
+
+		//apform = 0なら通常の形状それ以外の数値なら変更した形状(MatrixUtil.java)
+		int apform = 1;
+		BitMatrix bitMatrix = writer.encodecodeword(codewords, BarcodeFormat.QR_CODE, mask_pattern1, dimension, dimension, apform, hints);
 		BufferedImage image = MatrixToImageWriter.toBufferedImage(bitMatrix);
 		ImageIO.write(image, "png", new File(pathname));
 

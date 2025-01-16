@@ -245,29 +245,30 @@ def PFQRmain(contents,picturesize):
     Nonsystematiccode.nonsystematiccode("pictureinQR_mod.bmp")
   
 
-    nonsytematicQR = cv2.imread("nonsystematicQR.png")
+    nonsytematicQR_nomalAP = cv2.imread("nonsystematicQR_nomalAP.png")
+    nonsytematicQR_changeAP = cv2.imread("nonsystematicQR_changeAP.png")
 
 
     #HiddenQRコードを生成して保存
     backimage = cv2.imread("backimage//pattern1_backimage.bmp")
-    Hiddenqr = HiddenqrPattern1.HiddenQRgen(backimage, nonsytematicQR)
+    Hiddenqr = HiddenqrPattern1.HiddenQRgen(backimage, nonsytematicQR_changeAP)
     Hiddenqr_nomalFP = np.copy(Hiddenqr)
 
     #HiddenQRコードのファインダパターン部分だけ通常の形状に戻す
     # 左上
     for i in range (0, margin + modsize * 8):
         for j in range (0, margin + modsize * 8):
-            Hiddenqr_nomalFP[i][j] = nonsytematicQR[i][j]
+            Hiddenqr_nomalFP[i][j] = nonsytematicQR_changeAP[i][j]
 
     # 左下
     for i in range (qr_height - modsize * 8 - margin, qr_height):
         for j in range (0, margin + modsize * 8):
-            Hiddenqr_nomalFP[i][j] = nonsytematicQR[i][j]
+            Hiddenqr_nomalFP[i][j] = nonsytematicQR_changeAP[i][j]
             
     # 右上
     for i in range (0, margin + modsize * 8):
         for j in range (qr_width - modsize * 8 - margin, qr_width):
-            Hiddenqr_nomalFP[i][j] = nonsytematicQR[i][j]
+            Hiddenqr_nomalFP[i][j] = nonsytematicQR_changeAP[i][j]
             
 
 
@@ -281,7 +282,7 @@ def PFQRmain(contents,picturesize):
             
             Hiddenqr_nomalFP[i + pictureposition_offset_x][j + pictureposition_offset_y] = [picture[i][j][0], picture[i][j][1], picture[i][j][2]] 
             
-            nonsytematicQR[i + pictureposition_offset_x][j + pictureposition_offset_y] = [picture[i][j][0], picture[i][j][1], picture[i][j][2]] 
+            nonsytematicQR_nomalAP[i + pictureposition_offset_x][j + pictureposition_offset_y] = [picture[i][j][0], picture[i][j][1], picture[i][j][2]] 
 
 
     ratio = (pixelcount*100) // (qr_width*qr_height)
@@ -290,4 +291,4 @@ def PFQRmain(contents,picturesize):
 
     cv2.imwrite("imagedata_output//PFQRcode.jpg", Hiddenqr) #出力1
     cv2.imwrite("imagedata_output//PFQRcode_nomalFP.jpg", Hiddenqr_nomalFP) #出力2
-    cv2.imwrite("imagedata_output//pictureQRcode.jpg", nonsytematicQR) #出力3
+    cv2.imwrite("imagedata_output//pictureQRcode.jpg", nonsytematicQR_nomalAP) #出力3

@@ -85,6 +85,7 @@ public final class QRCodeWriter implements Writer {
                           int maskpattern,
                           int width,
                           int height,
+                          int apform,
                           Map<EncodeHintType,?> hints) throws WriterException {
 
     if (format != BarcodeFormat.QR_CODE) {
@@ -107,7 +108,7 @@ public final class QRCodeWriter implements Writer {
       }
     }
 
-    QRCode code = Encoder.encodecodeword(codewords, errorCorrectionLevel, maskpattern, hints);
+    QRCode code = Encoder.encodecodeword(codewords, errorCorrectionLevel, maskpattern, apform, hints);
     return renderResult(code, width, height, quietZone);
   }
 

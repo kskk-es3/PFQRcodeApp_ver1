@@ -46,11 +46,11 @@ final class MatrixUtil {
   };
 
   private static final int[][] POSITION_ADJUSTMENT_PATTERN2 = {
-    {1, 1, 1, 1, 1},
-    {1, 0, 0, 0, 1},
+    {1, 0, 1, 1, 1},
+    {0, 0, 0, 0, 1},
     {1, 0, 1, 0, 1},
-    {1, 0, 0, 0, 1},
-    {1, 1, 1, 1, 1},
+    {1, 0, 0, 0, 0},
+    {1, 1, 1, 0, 1},
 };
   // From Appendix E. Table 1, JIS0510X:2004 (p 71). The table was double-checked by komatsu.
   private static final int[][] POSITION_ADJUSTMENT_PATTERN_COORDINATE_TABLE = {

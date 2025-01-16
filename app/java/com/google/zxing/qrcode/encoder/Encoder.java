@@ -202,6 +202,7 @@ public final class Encoder {
   public static QRCode encodecodeword(byte[][] codewords,
                               ErrorCorrectionLevel ecLevel,
                               int maskPattern,
+                              int apform,
                               Map<EncodeHintType,?> hints) throws WriterException {
 
     int versionNumber = Integer.parseInt(hints.get(EncodeHintType.QR_VERSION).toString());
@@ -279,7 +280,11 @@ public final class Encoder {
     ByteMatrix matrix = new ByteMatrix(dimension, dimension);
 
     // Build the matrix and set it to "qrCode".
-    MatrixUtil.buildMatrix2(finalBits, ecLevel, version, maskPattern, matrix);
+    if (apform == 0) {
+      MatrixUtil.buildMatrix(finalBits, ecLevel, version, maskPattern, matrix);
+    }else{
+      MatrixUtil.buildMatrix2(finalBits, ecLevel, version, maskPattern, matrix);
+    }
     qrCode.setMatrix(matrix);
 
     return qrCode;
