@@ -7,7 +7,7 @@ from random import randint
 modsize = 20
 
 # 余白の大きさ
-margin = modsize
+margin = 3*modsize
 
 # モジュールと機能パターンの線の太さ
 thickness = 14

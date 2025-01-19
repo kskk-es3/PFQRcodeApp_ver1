@@ -38,7 +38,7 @@ public class QRgen {
 		ErrorCorrectionLevel EClevel = ErrorCorrectionLevel.L;
 
 		int mask_pattern = 0;
-		int margin = 1;
+		int margin = 3;
 		int modulesize = 20; //適宜変更
 		int dimension = modulesize * (17 + 4 * version + 2 * margin);
 		try {

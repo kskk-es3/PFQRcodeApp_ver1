@@ -21,169 +21,169 @@ def PFQRmain(contents,picturesize):
     ##QRコードにロゴを重ねてモジュール模様に変換(重ねるだけ)
 
     modsize = 20
-    margin = modsize
+    margin = 3*modsize
 
     #画像の座標と大きさを入力オプション1のパーセンテージ毎に設定
     if picturesize == "25%":
 
         #画像を埋め込むQRコード上の座標
-        pictureposition_offset_x = 180
-        pictureposition_offset_y = 180
+        pictureposition_offset_x = 220
+        pictureposition_offset_y = 220
 
         #画像をリサイズする大きさ
-        resize_width = 390
-        resize_height = 390
+        resize_width = 370
+        resize_height = 370
 
     elif picturesize == "26%":
 
         #画像を埋め込むQRコード上の座標
-        pictureposition_offset_x = 180
-        pictureposition_offset_y = 180
+        pictureposition_offset_x = 220
+        pictureposition_offset_y = 220
+
+        #画像をリサイズする大きさ
+        resize_width = 377
+        resize_height = 377
+
+    elif picturesize == "27%":
+
+        #画像を埋め込むQRコード上の座標
+        pictureposition_offset_x = 200
+        pictureposition_offset_y = 200
+
+        #画像をリサイズする大きさ
+        resize_width = 384
+        resize_height = 384
+
+    elif picturesize == "28%":
+
+        #画像を埋め込むQRコード上の座標
+        pictureposition_offset_x = 200
+        pictureposition_offset_y = 200
+
+        #画像をリサイズする大きさ
+        resize_width = 391
+        resize_height = 391
+
+    elif picturesize == "29%":
+
+        #画像を埋め込むQRコード上の座標
+        pictureposition_offset_x = 200
+        pictureposition_offset_y = 200
 
         #画像をリサイズする大きさ
         resize_width = 398
         resize_height = 398
 
-    elif picturesize == "27%":
+    elif picturesize == "30%":
 
         #画像を埋め込むQRコード上の座標
-        pictureposition_offset_x = 160
-        pictureposition_offset_y = 160
+        pictureposition_offset_x = 200
+        pictureposition_offset_y = 200
 
         #画像をリサイズする大きさ
         resize_width = 405
         resize_height = 405
 
-    elif picturesize == "28%":
-
-        #画像を埋め込むQRコード上の座標
-        pictureposition_offset_x = 160
-        pictureposition_offset_y = 160
-
-        #画像をリサイズする大きさ
-        resize_width = 413
-        resize_height = 413
-
-    elif picturesize == "29%":
-
-        #画像を埋め込むQRコード上の座標
-        pictureposition_offset_x = 160
-        pictureposition_offset_y = 160
-
-        #画像をリサイズする大きさ
-        resize_width = 420
-        resize_height = 420
-
-    elif picturesize == "30%":
-
-        #画像を埋め込むQRコード上の座標
-        pictureposition_offset_x = 160
-        pictureposition_offset_y = 160
-
-        #画像をリサイズする大きさ
-        resize_width = 427
-        resize_height = 427
-
     elif picturesize == "31%":
 
         #画像を埋め込むQRコード上の座標
-        pictureposition_offset_x = 160
-        pictureposition_offset_y = 160
+        pictureposition_offset_x = 200
+        pictureposition_offset_y = 200
 
         #画像をリサイズする大きさ
-        resize_width = 434
-        resize_height = 434
+        resize_width = 412
+        resize_height = 412
 
     elif picturesize == "32%":
 
         #画像を埋め込むQRコード上の座標
-        pictureposition_offset_x = 160
-        pictureposition_offset_y = 160
+        pictureposition_offset_x = 200
+        pictureposition_offset_y = 200
 
         #画像をリサイズする大きさ
-        resize_width = 441
-        resize_height = 441
+        resize_width = 419
+        resize_height = 419
 
     
     elif picturesize == "33%":
 
         #画像を埋め込むQRコード上の座標
-        pictureposition_offset_x = 160
-        pictureposition_offset_y = 160
+        pictureposition_offset_x = 200
+        pictureposition_offset_y = 200
 
         #画像をリサイズする大きさ
-        resize_width = 448
-        resize_height = 448
+        resize_width = 425
+        resize_height = 425
     
     elif picturesize == "34%":
 
         #画像を埋め込むQRコード上の座標
-        pictureposition_offset_x = 140
-        pictureposition_offset_y = 140
+        pictureposition_offset_x = 180
+        pictureposition_offset_y = 180
 
         #画像をリサイズする大きさ
-        resize_width = 455
-        resize_height = 455
+        resize_width = 431
+        resize_height = 431
 
     elif picturesize == "35%":
 
         #画像を埋め込むQRコード上の座標
-        pictureposition_offset_x = 140
-        pictureposition_offset_y = 140
+        pictureposition_offset_x = 180
+        pictureposition_offset_y = 180
 
         #画像をリサイズする大きさ
-        resize_width = 461
-        resize_height = 461
+        resize_width = 438
+        resize_height = 438
 
     elif picturesize == "36%":
 
         #画像を埋め込むQRコード上の座標
-        pictureposition_offset_x = 120
-        pictureposition_offset_y = 120
+        pictureposition_offset_x = 160
+        pictureposition_offset_y = 160
 
         #画像をリサイズする大きさ
-        resize_width = 468
-        resize_height = 468
+        resize_width = 444
+        resize_height = 444
 
     elif picturesize == "37%":
 
         #画像を埋め込むQRコード上の座標
-        pictureposition_offset_x = 120
-        pictureposition_offset_y = 120
+        pictureposition_offset_x = 160
+        pictureposition_offset_y = 160
 
         #画像をリサイズする大きさ
-        resize_width = 474
-        resize_height = 474
+        resize_width = 450
+        resize_height = 450
 
     elif picturesize == "38%":
 
         #画像を埋め込むQRコード上の座標
-        pictureposition_offset_x = 120
-        pictureposition_offset_y = 120
+        pictureposition_offset_x = 160
+        pictureposition_offset_y = 160
 
         #画像をリサイズする大きさ
-        resize_width = 481
-        resize_height = 481
+        resize_width = 456
+        resize_height = 456
 
     elif picturesize == "39%":
 
         #画像を埋め込むQRコード上の座標
-        pictureposition_offset_x = 120
-        pictureposition_offset_y = 100
+        pictureposition_offset_x = 160
+        pictureposition_offset_y = 160
 
         #画像をリサイズする大きさ
-        resize_width = 487
-        resize_height = 487
+        resize_width = 462
+        resize_height = 462
 
     elif picturesize == "40%":
 
         #画像を埋め込むQRコード上の座標
-        pictureposition_offset_x = 120
-        pictureposition_offset_y = 100
+        pictureposition_offset_x = 160
+        pictureposition_offset_y = 160
 
         #画像をリサイズする大きさ
-        resize_width = 493
-        resize_height = 493
+        resize_width = 468
+        resize_height = 468
 
     qrimage = cv2.imread("qr.bmp")
     picture_origin = cv2.imread(picturepath)
@@ -196,24 +196,36 @@ def PFQRmain(contents,picturesize):
 
     picture_height, picture_width = picture.shape[:2]
 
-    pixelcount = 0
-
-
     #ロゴをQRコードに重ねる。マスク部分は除く。
     for i in range (0, picture_height):
         for j in range (0, picture_width):
             if mask[i + pictureposition_offset_x][j + pictureposition_offset_y] == 255:
                 qrimage[i + pictureposition_offset_x][j + pictureposition_offset_y] = [picture[i][j][0], picture[i][j][1], picture[i][j][2]]  
 
+    cv2.imwrite("logoinQR_color.bmp", qrimage)
+
     #ロゴ入りQRコードを二値化する
     #グレースケールに変換　0.299⋅R+0.587⋅G+0.114⋅B
     qrimage_gray = cv2.cvtColor(qrimage, cv2.COLOR_BGR2GRAY)
 
-    # 閾値の設定
+    cv2.imwrite("logoinQR_gray.bmp", qrimage_gray)
+
+    # # 閾値の設定
+    # pixelsum = 0
+    # picture_gray = cv2.cvtColor(picture, cv2.COLOR_BGR2GRAY)
+    # for i in range (0, picture_height):
+    #     for j in range (0, picture_width):
+    #         pixelsum = pixelsum + picture_gray[i][j]
+
+    # pixelave = pixelsum/(picture_height*picture_width)
+    # threshold = pixelave
     threshold = 126
+
+    print("threshold:",threshold)
 
     # 二値化(閾値を超えた画素を255にする。)
     ret, qrimage_bin = cv2.threshold(qrimage_gray, threshold, 255, cv2.THRESH_BINARY)
+    cv2.imwrite("logoinQR_bin.bmp", qrimage_bin)
 
     #重ねたロゴをモジュール模様にする
     #ロゴをモジュールの格子状に区切ってモジュールの中心のピクセルをモジュールの色にする
@@ -285,7 +297,7 @@ def PFQRmain(contents,picturesize):
             nonsytematicQR_nomalAP[i + pictureposition_offset_x][j + pictureposition_offset_y] = [picture[i][j][0], picture[i][j][1], picture[i][j][2]] 
 
 
-    ratio = (pixelcount*100) // (qr_width*qr_height)
+    ratio = (pixelcount*100) / ((qr_width-2*margin)*(qr_height-2*margin))
 
     print("picture area ratio:",ratio)
 

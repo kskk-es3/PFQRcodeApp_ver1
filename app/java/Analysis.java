@@ -40,7 +40,7 @@ public class Analysis {
 	int version = 5;
 	ErrorCorrectionLevel eLevel = ErrorCorrectionLevel.L;
 	int mask_pattern1 = 0;
-	int margin = 1;
+	int margin = 3;
 	int modulesize = 20; //適宜変更
 	int dimension = modulesize * (17 + 4 * version + 2 * margin);
 
