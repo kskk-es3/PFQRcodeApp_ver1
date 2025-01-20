@@ -211,14 +211,6 @@ def PFQRmain(contents,picturesize):
     cv2.imwrite("logoinQR_gray.bmp", qrimage_gray)
 
     # # 閾値の設定
-    # pixelsum = 0
-    # picture_gray = cv2.cvtColor(picture, cv2.COLOR_BGR2GRAY)
-    # for i in range (0, picture_height):
-    #     for j in range (0, picture_width):
-    #         pixelsum = pixelsum + picture_gray[i][j]
-
-    # pixelave = pixelsum/(picture_height*picture_width)
-    # threshold = pixelave
     threshold = 126
 
     print("threshold:",threshold)
