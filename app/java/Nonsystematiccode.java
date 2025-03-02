@@ -83,8 +83,8 @@ public class Nonsystematiccode {
 			System.out.println();
 		}
 
-		analysis.genqr1(datablocks_byte, "nonsystematicQR_nomalAP.png");
-		analysis.genqr2(datablocks_byte, "nonsystematicQR_changeAP.png");
+		analysis.genqr1(datablocks_byte, "app/nonsystematicQR_nomalAP.png");
+		analysis.genqr2(datablocks_byte, "app/nonsystematicQR_changeAP.png");
 		  
 		
     }

@@ -13,7 +13,13 @@ margin = 3*modsize
 thickness = 14
 
 ##HiddenQRコードのパターン1を作る(2025/1/4現在はパターン1のみ)
-def HiddenQRgen(backimage, qrimage):           
+def HiddenQRgen(backimage_path, qrimage):
+    # 画像を読み込む
+    backimage = cv2.imread(backimage_path)
+    
+    # 画像が正しく読み込まれたかを確認
+    if backimage is None:
+        raise FileNotFoundError(f"バックイメージが見つかりません: {backimage_path}")       
 
     q_height, q_width = qrimage.shape[:2]
     b_height, b_width = backimage.shape[:2] 
@@ -37,7 +43,7 @@ def HiddenQRgen(backimage, qrimage):
     # FindpatternGen(qrimage)
 
     #あらかじめ用意してあるファインダパターンを読み込む
-    findpattern = cv2.imread("findpattern.png",cv2.IMREAD_UNCHANGED)
+    findpattern = cv2.imread("app/findpattern.png",cv2.IMREAD_UNCHANGED)
 
     #ファインダパターンを追加
     for i in range (0, q_height):
@@ -48,7 +54,7 @@ def HiddenQRgen(backimage, qrimage):
                 if findpattern[i][j][3] == 255:
                     backimage[i][j] = [findpattern[i][j][0], findpattern[i][j][1], findpattern[i][j][2]]
                     
-    cv2.imwrite("Hiddenqr.bmp", backimage)
+    cv2.imwrite("app/Hiddenqr.bmp", backimage)
 
     return backimage
 

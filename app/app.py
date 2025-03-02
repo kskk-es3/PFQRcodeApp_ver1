@@ -55,20 +55,24 @@ def result():
 @app.route('/download/PFQRcode')
 def download_PFQRcode():
     # PFQRcodeをダウンロード
-    return send_from_directory('./imagedata_output', 'PFQRcode.jpg', as_attachment=True)
+    return send_from_directory('imagedata_output', 'PFQRcode.jpg', as_attachment=True)
 
 @app.route('/download/PFQRcode_nomalFP')
 def download_PFQRcode_nomalFP():
     # PFQRcode_nomalFPをダウンロード
-    return send_from_directory('./imagedata_output', 'PFQRcode_nomalFP.jpg', as_attachment=True)
+    return send_from_directory('imagedata_output', 'PFQRcode_nomalFP.jpg', as_attachment=True)
 
 @app.route('/download/pictureQRcode')
 def download_pictureQRcode():
     # pictureQRcodeをダウンロード
-    return send_from_directory('./imagedata_output', 'pictureQRcode.jpg', as_attachment=True)
+    return send_from_directory('imagedata_output', 'pictureQRcode.jpg', as_attachment=True)
 
 
 if __name__ == "__main__":
+
+    # アップロード先のディレクトリが存在しない場合は作成
+    if not os.path.exists(app.config['UPLOAD_FOLDER']):
+        os.makedirs(app.config['UPLOAD_FOLDER'])
 
     # javaファイルを実行するためにJpypeを起動
     jpype.startJVM()
