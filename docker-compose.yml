@@ -1,0 +1,9 @@
+services:
+  app:
+    container_name: pfqr
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    ports:
+      - "80:80"
+    # command: ["bash", "-c", "/app/venv/bin/activate"]
