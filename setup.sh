@@ -11,4 +11,4 @@ trap cleanup EXIT
 # docker compose up -d --force-recreate
 
 docker compose build
-docker compose up
+docker compose up -d
