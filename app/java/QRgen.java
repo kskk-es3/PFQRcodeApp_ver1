@@ -28,6 +28,8 @@ import com.google.zxing.common.HybridBinarizer;
 
 public class QRgen {
     public static void qrgen(String contents) {
+
+
         //// URLを受け取ってQRコードを生成する
         
 		System.out.println(contents);
@@ -42,13 +44,13 @@ public class QRgen {
 		try {
 			Map<EncodeHintType, Object> hints = new EnumMap<>(EncodeHintType.class);
 			hints.put(EncodeHintType.QR_VERSION, version);
-			hints.put(EncodeHintType.ERROR_CORRECTION, EClevel);
+      		hints.put(EncodeHintType.ERROR_CORRECTION, EClevel);
 			hints.put(EncodeHintType.QR_MASK_PATTERN, mask_pattern);
 			hints.put(EncodeHintType.MARGIN, margin);
 			QRCodeWriter writer = new QRCodeWriter();
 			BitMatrix bitMatrix = writer.encode(contents, BarcodeFormat.QR_CODE, dimension, dimension, hints);
 			BufferedImage image = MatrixToImageWriter.toBufferedImage(bitMatrix);
-			ImageIO.write(image, "BMP", new File("app/qr.bmp"));
+			ImageIO.write(image, "BMP", new File("qr.bmp"));
 
 			
 		
@@ -90,7 +92,7 @@ public class QRgen {
 			//１モジュール1bitのbitmatrixを生成
 			Map<EncodeHintType, Object> hints2 = new EnumMap<>(EncodeHintType.class);
 			hints2.put(EncodeHintType.QR_VERSION, version);
-			hints2.put(EncodeHintType.ERROR_CORRECTION, EClevel);
+      		hints2.put(EncodeHintType.ERROR_CORRECTION, EClevel);
 			hints2.put(EncodeHintType.QR_MASK_PATTERN, mask_pattern);
 			hints2.put(EncodeHintType.MARGIN, 0);
 			int dimension_mod = 17 + 4 * version;
@@ -213,7 +215,7 @@ public class QRgen {
 			}
 
 			BufferedImage mask = MatrixToImageWriter.toBufferedImage(mask_bit_resize);
-			ImageIO.write(mask, "BMP", new File("app/mask.bmp"));
+			ImageIO.write(mask, "BMP", new File("mask.bmp"));
 
 			// ////機能パターンを黒くマスク
 			// BitMatrix fun_mask_bit = new BitMatrix(bitmatrix_mod.getHeight());

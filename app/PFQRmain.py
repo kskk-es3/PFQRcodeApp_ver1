@@ -7,10 +7,10 @@ import HiddenqrPattern1
 ####PFQRコード生成システム，コアプログラム
 
 #入力1 格納するURL，入力オプション1画像のサイズ(ラジオボタンのラベルをそのまま入力)
-def PFQRmain(contents, picturesize):
+def PFQRmain(contents,picturesize):
 
     #入力2 QRコード上に配置する画像のパス
-    picturepath = "uploads/picture.png"
+    picturepath = "uploads//picture.png"
 
     ##QRコードを生成　QRgen.javaで処理
     #QRgenを呼び出し
@@ -184,18 +184,10 @@ def PFQRmain(contents, picturesize):
         #画像をリサイズする大きさ
         resize_width = 468
         resize_height = 468
-    
-    else:
-        #画像を埋め込むQRコード上の座標
-        pictureposition_offset_x = 160
-        pictureposition_offset_y = 160
-        #画像をリサイズする大きさ
-        resize_width = 468
-        resize_height = 468
 
     qrimage = cv2.imread("qr.bmp")
     picture_origin = cv2.imread(picturepath)
-    mask = cv2.imread("app/mask.bmp",cv2.IMREAD_GRAYSCALE)
+    mask = cv2.imread("mask.bmp",cv2.IMREAD_GRAYSCALE)
 
     qr_height, qr_width = qrimage.shape[:2]
 
@@ -210,13 +202,13 @@ def PFQRmain(contents, picturesize):
             if mask[i + pictureposition_offset_x][j + pictureposition_offset_y] == 255:
                 qrimage[i + pictureposition_offset_x][j + pictureposition_offset_y] = [picture[i][j][0], picture[i][j][1], picture[i][j][2]]  
 
-    cv2.imwrite("app/logoinQR_color.bmp", qrimage)
+    cv2.imwrite("logoinQR_color.bmp", qrimage)
 
     #ロゴ入りQRコードを二値化する
     #グレースケールに変換　0.299⋅R+0.587⋅G+0.114⋅B
     qrimage_gray = cv2.cvtColor(qrimage, cv2.COLOR_BGR2GRAY)
 
-    cv2.imwrite("app/logoinQR_gray.bmp", qrimage_gray)
+    cv2.imwrite("logoinQR_gray.bmp", qrimage_gray)
 
     # # 閾値の設定
     threshold = 126
@@ -225,7 +217,7 @@ def PFQRmain(contents, picturesize):
 
     # 二値化(閾値を超えた画素を255にする。)
     ret, qrimage_bin = cv2.threshold(qrimage_gray, threshold, 255, cv2.THRESH_BINARY)
-    cv2.imwrite("app/logoinQR_bin.bmp", qrimage_bin)
+    cv2.imwrite("logoinQR_bin.bmp", qrimage_bin)
 
     #重ねたロゴをモジュール模様にする
     #ロゴをモジュールの格子状に区切ってモジュールの中心のピクセルをモジュールの色にする
@@ -247,14 +239,14 @@ def PFQRmain(contents, picturesize):
             else:
                 cv2.rectangle(qrimage_bin, (j, i), (j + modsize, i + modsize), 255, thickness=-1)
 
-    cv2.imwrite("app/pictureinQR_mod.bmp", qrimage_bin)
+    cv2.imwrite("pictureinQR_mod.bmp", qrimage_bin)
 
 
     ##非組織符号化を行って，モジュール化した画像部分と格納データのモジュールはそのままで符号化領域の上下と左側に検査点を配置したQRコードを生成
     #Nonsystematiccode.javaで処理
     #Nonsystematiccodeを呼び出し
     Nonsystematiccode = jpype.JClass("Nonsystematiccode")
-    Nonsystematiccode.nonsystematiccode("app/pictureinQR_mod.bmp")
+    Nonsystematiccode.nonsystematiccode("pictureinQR_mod.bmp")
   
 
     nonsytematicQR_nomalAP = cv2.imread("nonsystematicQR_nomalAP.png")
@@ -262,8 +254,8 @@ def PFQRmain(contents, picturesize):
 
 
     #HiddenQRコードを生成して保存
-    backimage_path = "app/backimage/pattern1_backimage.bmp"
-    Hiddenqr = HiddenqrPattern1.HiddenQRgen(backimage_path, nonsytematicQR_changeAP)
+    backimage = cv2.imread("backimage//pattern1_backimage.bmp")
+    Hiddenqr = HiddenqrPattern1.HiddenQRgen(backimage, nonsytematicQR_changeAP)
     Hiddenqr_nomalFP = np.copy(Hiddenqr)
 
     #HiddenQRコードのファインダパターン部分だけ通常の形状に戻す
@@ -301,6 +293,6 @@ def PFQRmain(contents, picturesize):
 
     print("picture area ratio:",ratio)
 
-    cv2.imwrite("app/imagedata_output/PFQRcode.jpg", Hiddenqr) #出力1
-    cv2.imwrite("app/imagedata_output/PFQRcode_nomalFP.jpg", Hiddenqr_nomalFP) #出力2
-    cv2.imwrite("app/imagedata_output/pictureQRcode.jpg", nonsytematicQR_nomalAP) #出力3
+    cv2.imwrite("imagedata_output//PFQRcode.jpg", Hiddenqr) #出力1
+    cv2.imwrite("imagedata_output//PFQRcode_nomalFP.jpg", Hiddenqr_nomalFP) #出力2
+    cv2.imwrite("imagedata_output//pictureQRcode.jpg", nonsytematicQR_nomalAP) #出力3
