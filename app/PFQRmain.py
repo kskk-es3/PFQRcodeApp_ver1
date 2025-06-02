@@ -6,6 +6,9 @@ import HiddenqrPattern1
 
 ####PFQRコード生成システム，コアプログラム
 
+modsize = 20
+margin = 3*modsize
+
 #入力1 格納するURL，入力オプション1画像のサイズ(ラジオボタンのラベルをそのまま入力)
 def PFQRmain(contents,picturesize):
 
@@ -20,10 +23,7 @@ def PFQRmain(contents,picturesize):
 
     ##QRコードにロゴを重ねてモジュール模様に変換(重ねるだけ)
 
-    modsize = 20
-    margin = 3*modsize
-
-    #画像の座標と大きさを入力オプション1のパーセンテージ毎に設定
+    #画像の格納座標と大きさを入力オプション1のパーセンテージ毎に設定
     if picturesize == "25%":
 
         #画像を埋め込むQRコード上の座標
@@ -211,12 +211,25 @@ def PFQRmain(contents,picturesize):
     cv2.imwrite("logoinQR_gray.bmp", qrimage_gray)
 
     # # 閾値の設定
-    threshold = 126
 
-    print("threshold:",threshold)
+    # ##パターン1-定数を閾値として，格納画像全体を二値化
+    # threshold = 170
+    # # 二値化(閾値を超えた画素を255にする。)
+    # ret, qrimage_bin = cv2.threshold(qrimage_gray, threshold, 255, cv2.THRESH_BINARY)
 
-    # 二値化(閾値を超えた画素を255にする。)
-    ret, qrimage_bin = cv2.threshold(qrimage_gray, threshold, 255, cv2.THRESH_BINARY)
+    # ##パターン2-格納画像全体のピクセルの平均値を閾値として，格納画像全体を二値化
+    # picture_gray = cv2.cvtColor(picture, cv2.COLOR_BGR2GRAY)
+    # threshold = np.mean(picture_gray)
+
+    # print("threshold:",threshold)
+
+    # # 二値化(閾値を超えた画素を255にする。)
+    # ret, qrimage_bin = cv2.threshold(qrimage_gray, threshold, 255, cv2.THRESH_BINARY)
+
+
+    ##(要修正)パターン3-1モジュール毎に二値化，閾値は9×9モジュールを1ブロックとしたときのブロック全体の輝度値の平均
+    qrimage_bin = thresholding_9modblock(qrimage_gray,picture_height,picture_width,pictureposition_offset_x,pictureposition_offset_y)
+
     cv2.imwrite("logoinQR_bin.bmp", qrimage_bin)
 
     #重ねたロゴをモジュール模様にする
@@ -248,7 +261,8 @@ def PFQRmain(contents,picturesize):
     Nonsystematiccode = jpype.JClass("Nonsystematiccode")
     Nonsystematiccode.nonsystematiccode("pictureinQR_mod.bmp")
   
-
+    #nonsystematiccodで生成したnonsytematicQR_nomalAPとnonsytematicQR_changeAPをインポート
+    #nomalAPは通常のアライメントパターン，changeAPは少しアライメントパターンの形状を変更している(HiddenQR化した時にアライメントパターンが目立たないように)
     nonsytematicQR_nomalAP = cv2.imread("nonsystematicQR_nomalAP.png")
     nonsytematicQR_changeAP = cv2.imread("nonsystematicQR_changeAP.png")
 
@@ -296,3 +310,32 @@ def PFQRmain(contents,picturesize):
     cv2.imwrite("imagedata_output//PFQRcode.jpg", Hiddenqr) #出力1
     cv2.imwrite("imagedata_output//PFQRcode_nomalFP.jpg", Hiddenqr_nomalFP) #出力2
     cv2.imwrite("imagedata_output//pictureQRcode.jpg", nonsytematicQR_nomalAP) #出力3
+
+#検討事項,ブロックのピクセルがすべて同じ色(あるいは似た色)だった場合適切に閾値を決定できない#
+## 1モジュール毎に二値化，二値化したいモジュールを中心に持つ9×9モジュールのブロックの輝度値の平均を閾値とする．
+def thresholding_9modblock(grayimage, picture_height, picture_width, pictureposition_offset_x, pictureposition_offset_y):
+
+    for x in range(pictureposition_offset_x, pictureposition_offset_x+picture_height, modsize):
+        for y in range(pictureposition_offset_y, pictureposition_offset_y+picture_width, modsize):
+            # ブロック領域を抽出
+            block = grayimage[x-4*modsize:x+5*modsize, y-4*modsize:y+5*modsize]
+
+            # ブロック全体の平均輝度値を計算
+            threshold = np.mean(block)
+
+            # ブロック全体の輝度値がほとんど同じ場合はthresholdを126にする．(応急処置)
+            max = np.max(block)
+            min = np.min(block)
+            if (max - min)<=30:
+                threshold = 0
+
+            # 中心の modsize*modsize 領域を計算
+            center_region = grayimage[x:x+modsize, y:y+modsize]
+
+            # 中心領域を二値化
+            binarized_center = (center_region > threshold).astype(np.uint8) * 255
+
+            # 二値化結果を出力画像に反映
+            grayimage[x:x+modsize, y:y+modsize] = binarized_center
+
+    return grayimage

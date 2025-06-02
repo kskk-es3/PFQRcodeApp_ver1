@@ -85,7 +85,7 @@ public class Nonsystematiccode {
 
 		analysis.genqr1(datablocks_byte, "nonsystematicQR_nomalAP.png");
 		analysis.genqr2(datablocks_byte, "nonsystematicQR_changeAP.png");
-
+		  
 		
     }
 }

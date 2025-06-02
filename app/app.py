@@ -15,7 +15,7 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'bmp'}
 
 def allowed_file(filename):
     return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
@@ -41,7 +41,7 @@ def upload_file():
             #PFQRを生成
             PFQRmain.PFQRmain(input_text,input_picturesize)
 
-             # 処理完了後、結果ページへリダイレクト
+            # 処理完了後、結果ページへリダイレクト
             return redirect(url_for('result'))
 
     return render_template('index.html')
