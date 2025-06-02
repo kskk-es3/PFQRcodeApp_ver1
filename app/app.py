@@ -8,7 +8,16 @@ app = Flask(__name__, static_folder='imagedata_output')
 
 # アップロードされたファイルを保存するディレクトリ
 UPLOAD_FOLDER = 'uploads'
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)  # Create the folder if it doesn't exist
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+
+@app.route('/', methods=['POST'])
+def upload_file():
+    file = request.files['file']
+    new_filename = secure_filename(file.filename)
+    file.save(os.path.join(UPLOAD_FOLDER, new_filename))
+    return 'File uploaded successfully'
 
 # 許可するファイルの拡張子
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'bmp'}
