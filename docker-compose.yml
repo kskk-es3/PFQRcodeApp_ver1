@@ -1,8 +1,8 @@
 services:
   app:
-    container_name: pfqr_v1
+    container_name: pfqr_v2
     build:
       context: .
       dockerfile: docker/Dockerfile
     ports:
-      - "80:80"
+      - "81:81"
