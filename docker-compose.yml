@@ -6,4 +6,3 @@ services:
       dockerfile: docker/Dockerfile
     ports:
       - "80:80"
-    # command: ["bash", "-c", "/app/venv/bin/activate"]
